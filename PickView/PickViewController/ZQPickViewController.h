@@ -10,10 +10,27 @@
 
 @interface ZQPickViewController : UIViewController
 
+typedef void(^SelectedCallBack)(ZQPickViewController *pickViewController, NSInteger index);
+
 + (instancetype)initWithTitleButton:(UIButton *)titleButton titleList:(NSArray <NSString *> *)titleList;
-
-- (void)setBottonViewHeight:(CGFloat)height;
-
+/** 圆角 */
+@property (nonatomic, assign) CGFloat cornerRadius;
+/** 底部试图的高 */
+@property (nonatomic, assign) CGFloat backViewHeight;
+/** 底部试图的颜色 */
+@property (nonatomic, strong) UIColor *backViewColor;
+/** 选中的回调 */
+- (void)selectedCallBack:(SelectedCallBack)callBack;
+/** 显示 */
 - (void)show;
+/** 隐藏 */
+- (void)hidden;
+/**
+ 返回一个带箭头的按钮
 
+ @param title 标题
+ @param frame 坐标
+ @return 按钮
+ */
++ (UIButton *)arrowButtonWithTitle:(NSString *)title frame:(CGRect)frame;
 @end

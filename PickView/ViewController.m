@@ -11,7 +11,7 @@
 
 @interface ViewController ()
 
-@property (nonatomic, weak) IBOutlet UIButton *titleBtn;
+@property (nonatomic, strong) UIButton *titleBtn;
 
 @end
 
@@ -20,12 +20,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _titleBtn = [ZQPickViewController arrowButtonWithTitle:@"Button" frame:CGRectMake(100, 200, 120, 50)];
+    [self.view addSubview:_titleBtn];
+    [_titleBtn addTarget:self action:@selector(showPickView:) forControlEvents:UIControlEventTouchUpInside];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-- (IBAction)showPickView:(UIButton *)sender {
+- (void)showPickView:(UIButton *)sender {
     
-    ZQPickViewController *vc = [ZQPickViewController initWithTitleButton:_titleBtn titleList:@[@"Hello",@"Hello",@"Hello",@"Hello",@"Hello",@"Hello",@"Hello",@"Hello",@"Hello",@"Hello"]];
+    NSArray *titleList = @[@"Test1",@"Test2",@"Test3",@"Test4",@"Test5"];
+    ZQPickViewController *vc = [ZQPickViewController initWithTitleButton:_titleBtn titleList:titleList];
+    [vc selectedCallBack:^(ZQPickViewController *pickViewController, NSInteger index) {
+        [_titleBtn setTitle:titleList[index] forState:UIControlStateNormal];
+        [pickViewController hidden];
+    }];
+    vc.backViewColor = [UIColor purpleColor];
     [vc show];
 }
 
