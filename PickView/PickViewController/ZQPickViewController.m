@@ -29,9 +29,11 @@
 
     NSString *titleButtonText = titleButton.titleLabel.text;
     
+    CGRect titleButtonFrame = [titleButton.superview convertRect:titleButton.frame toView:pickVC.view];
+
     pickVC.titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     pickVC.titleButton.titleLabel.font = titleButton.titleLabel.font;
-    pickVC.titleButton.frame = titleButton.frame;
+    pickVC.titleButton.frame = titleButtonFrame;
     pickVC.titleButton.backgroundColor = titleButton.backgroundColor;
     [pickVC.titleButton setTitle:titleButtonText forState:UIControlStateNormal];
     [pickVC.titleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
