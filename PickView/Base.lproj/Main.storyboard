@@ -20,8 +20,25 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f30-NY-eVi">
+                                <rect key="frame" x="127" y="308" width="120" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="bnA-Dt-B9J"/>
+                                    <constraint firstAttribute="width" constant="120" id="xsT-12-ifK"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="f30-NY-eVi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0f9-de-0oi"/>
+                            <constraint firstItem="f30-NY-eVi" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="WQr-xG-0Q6"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="titleBtn1" destination="f30-NY-eVi" id="Wqb-bI-pbx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

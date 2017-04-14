@@ -30,6 +30,7 @@
     NSString *titleButtonText = titleButton.titleLabel.text;
     
     pickVC.titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    pickVC.titleButton.titleLabel.font = titleButton.titleLabel.font;
     pickVC.titleButton.frame = titleButton.frame;
     pickVC.titleButton.backgroundColor = titleButton.backgroundColor;
     [pickVC.titleButton setTitle:titleButtonText forState:UIControlStateNormal];
@@ -90,15 +91,27 @@
     titleButton.backgroundColor = [UIColor colorWithRed:0.99 green:0.66 blue:0.16 alpha:1.00];
     [titleButton setTitle:title forState:UIControlStateNormal];
     [titleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [titleButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
     titleButton.layer.cornerRadius = floorf(CGRectGetHeight(frame)/2);
     titleButton.layer.masksToBounds = YES;
 
-    UIImageView *arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"botton"]];
-    arrowImageView.center = CGPointMake(CGRectGetWidth(titleButton.frame)-20, CGRectGetHeight(titleButton.frame)/2);
-    [titleButton addSubview:arrowImageView];
+    [self addArrowImageView:titleButton];
 
     return titleButton;
+}
+
++ (void)addArrowImageView:(UIButton *)button {
+    
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor colorWithRed:0.99 green:0.66 blue:0.16 alpha:1.00];
+    button.layer.cornerRadius = floorf(CGRectGetHeight(button.frame)/2);
+    button.layer.masksToBounds = YES;
+
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
+
+    UIImageView *arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"botton"]];
+    arrowImageView.center = CGPointMake(CGRectGetWidth(button.frame)-20, CGRectGetHeight(button.frame)/2);
+    [button addSubview:arrowImageView];
+
 }
 
 - (void)setBackViewHeight:(CGFloat)backViewHeight {

@@ -11,7 +11,7 @@
 @interface ZQPickViewController : UIViewController
 
 typedef void(^SelectedCallBack)(ZQPickViewController *pickViewController, NSInteger index);
-
+/** 初始化 */
 + (instancetype)initWithTitleButton:(UIButton *)titleButton titleList:(NSArray <NSString *> *)titleList;
 /** 圆角 */
 @property (nonatomic, assign) CGFloat cornerRadius;
@@ -33,4 +33,10 @@ typedef void(^SelectedCallBack)(ZQPickViewController *pickViewController, NSInte
  @return 按钮
  */
 + (UIButton *)arrowButtonWithTitle:(NSString *)title frame:(CGRect)frame;
+/**
+ xib设置的button可以调用以下方法设置箭头图片
+
+ @param button 传入按钮
+ */
++ (void)addArrowImageView:(UIButton *)button;
 @end
