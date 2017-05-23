@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F189E6421ED406D1002B3B98 /* blackBotton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F189E6401ED406D1002B3B98 /* blackBotton@2x.png */; };
+		F189E6431ED406D1002B3B98 /* blackTop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F189E6411ED406D1002B3B98 /* blackTop@2x.png */; };
+		F189E6471ED406D8002B3B98 /* ZQPickButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F189E6461ED406D8002B3B98 /* ZQPickButton.m */; };
+		F189E6491ED40979002B3B98 /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = F189E6481ED40979002B3B98 /* cat.png */; };
+		F189E64D1ED40A06002B3B98 /* UIImage+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = F189E64C1ED40A06002B3B98 /* UIImage+Add.m */; };
 		F1CB20BE1E9F975F00CA0980 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CB20BD1E9F975F00CA0980 /* main.m */; };
 		F1CB20C11E9F975F00CA0980 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CB20C01E9F975F00CA0980 /* AppDelegate.m */; };
 		F1CB20C41E9F975F00CA0980 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CB20C31E9F975F00CA0980 /* ViewController.m */; };
@@ -19,6 +24,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F189E6401ED406D1002B3B98 /* blackBotton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackBotton@2x.png"; sourceTree = "<group>"; };
+		F189E6411ED406D1002B3B98 /* blackTop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackTop@2x.png"; sourceTree = "<group>"; };
+		F189E6451ED406D8002B3B98 /* ZQPickButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQPickButton.h; sourceTree = "<group>"; };
+		F189E6461ED406D8002B3B98 /* ZQPickButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQPickButton.m; sourceTree = "<group>"; };
+		F189E6481ED40979002B3B98 /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
+		F189E64B1ED40A06002B3B98 /* UIImage+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Add.h"; sourceTree = "<group>"; };
+		F189E64C1ED40A06002B3B98 /* UIImage+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Add.m"; sourceTree = "<group>"; };
 		F1CB20B91E9F975F00CA0980 /* PickView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PickView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1CB20BD1E9F975F00CA0980 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F1CB20BF1E9F975F00CA0980 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -46,6 +58,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F189E6441ED406D8002B3B98 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F189E6451ED406D8002B3B98 /* ZQPickButton.h */,
+				F189E6461ED406D8002B3B98 /* ZQPickButton.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F189E64A1ED40A06002B3B98 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				F189E64B1ED40A06002B3B98 /* UIImage+Add.h */,
+				F189E64C1ED40A06002B3B98 /* UIImage+Add.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
 		F1CB20B01E9F975F00CA0980 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +95,7 @@
 		F1CB20BB1E9F975F00CA0980 /* PickView */ = {
 			isa = PBXGroup;
 			children = (
+				F189E64A1ED40A06002B3B98 /* UIImage */,
 				F1CB20D31E9F977B00CA0980 /* PickViewController */,
 				F1CB20BF1E9F975F00CA0980 /* AppDelegate.h */,
 				F1CB20C01E9F975F00CA0980 /* AppDelegate.m */,
@@ -82,6 +113,7 @@
 		F1CB20BC1E9F975F00CA0980 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F189E6481ED40979002B3B98 /* cat.png */,
 				F1CB20BD1E9F975F00CA0980 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -90,6 +122,7 @@
 		F1CB20D31E9F977B00CA0980 /* PickViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F189E6441ED406D8002B3B98 /* View */,
 				F1CB20D91E9FA78F00CA0980 /* Resource */,
 				F1CB20D41E9F97AB00CA0980 /* ZQPickViewController.h */,
 				F1CB20D51E9F97AB00CA0980 /* ZQPickViewController.m */,
@@ -100,6 +133,8 @@
 		F1CB20D91E9FA78F00CA0980 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F189E6401ED406D1002B3B98 /* blackBotton@2x.png */,
+				F189E6411ED406D1002B3B98 /* blackTop@2x.png */,
 				F1CB20DA1E9FA7A100CA0980 /* botton@2x.png */,
 				F1CB20DB1E9FA7A100CA0980 /* top@2x.png */,
 			);
@@ -167,9 +202,12 @@
 			files = (
 				F1CB20DD1E9FA7A100CA0980 /* top@2x.png in Resources */,
 				F1CB20DC1E9FA7A100CA0980 /* botton@2x.png in Resources */,
+				F189E6491ED40979002B3B98 /* cat.png in Resources */,
+				F189E6421ED406D1002B3B98 /* blackBotton@2x.png in Resources */,
 				F1CB20CC1E9F975F00CA0980 /* LaunchScreen.storyboard in Resources */,
 				F1CB20C91E9F975F00CA0980 /* Assets.xcassets in Resources */,
 				F1CB20C71E9F975F00CA0980 /* Main.storyboard in Resources */,
+				F189E6431ED406D1002B3B98 /* blackTop@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +220,8 @@
 			files = (
 				F1CB20C41E9F975F00CA0980 /* ViewController.m in Sources */,
 				F1CB20C11E9F975F00CA0980 /* AppDelegate.m in Sources */,
+				F189E6471ED406D8002B3B98 /* ZQPickButton.m in Sources */,
+				F189E64D1ED40A06002B3B98 /* UIImage+Add.m in Sources */,
 				F1CB20D71E9F97AB00CA0980 /* ZQPickViewController.m in Sources */,
 				F1CB20BE1E9F975F00CA0980 /* main.m in Sources */,
 			);
@@ -344,6 +384,7 @@
 				F1CB20D21E9F975F00CA0980 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

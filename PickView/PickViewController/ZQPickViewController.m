@@ -9,20 +9,22 @@
 #import "ZQPickViewController.h"
 
 #define space 4
+#define titleSpace 8
 
 @interface ZQPickViewController ()
 
 @property (nonatomic, strong) UIScrollView *scorllView;
-@property (nonatomic, strong) UIButton *titleButton;
+@property (nonatomic, strong) ZQPickButton *titleButton;
 @property (nonatomic, assign) CGFloat defaultHeight;
-@property (nonatomic, strong) UIImageView *arrowImageView;
 @property (nonatomic, copy) SelectedCallBack selectedCallBack;
+@property (nonatomic, strong) UIImage *topImage;
+@property (nonatomic, strong) UIImage *bottonImage;
 
 @end
 
 @implementation ZQPickViewController
 
-+ (instancetype)initWithTitleButton:(UIButton *)titleButton titleList:(NSArray<NSString *> *)titleList {
++ (instancetype)initWithTitleButton:(ZQPickButton *)titleButton titleList:(NSArray<NSString *> *)titleList {
     
     ZQPickViewController *pickVC = [[ZQPickViewController alloc] init];
     pickVC.view.backgroundColor = [UIColor clearColor];
@@ -30,24 +32,29 @@
     NSString *titleButtonText = titleButton.titleLabel.text;
     
     CGRect titleButtonFrame = [titleButton.superview convertRect:titleButton.frame toView:pickVC.view];
-
-    pickVC.titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    pickVC.titleButton.titleLabel.font = titleButton.titleLabel.font;
-    pickVC.titleButton.frame = titleButtonFrame;
-    pickVC.titleButton.backgroundColor = titleButton.backgroundColor;
-    [pickVC.titleButton setTitle:titleButtonText forState:UIControlStateNormal];
-    [pickVC.titleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [pickVC.titleButton addTarget:pickVC action:@selector(pickTitleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [pickVC.titleButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
+    ZQPickButton *pickButton = [ZQPickViewController buttonWithFrame:titleButtonFrame];
+    pickButton.titleLabel.font = titleButton.titleLabel.font;
+    pickButton.backgroundColor = titleButton.backgroundColor;
+    pickButton.titleLabel.text = titleButtonText;
+    pickButton.titleLabel.textColor = titleButton.titleLabel.textColor;
+    pickButton.layer.borderWidth = titleButton.layer.borderWidth;
+    pickButton.layer.borderColor = titleButton.layer.borderColor;
+    pickButton.imageView.image = titleButton.imageView.image;
+    if (titleButton.imageViewIsHidden) {
+        [pickButton setImageViewHidden];
+    }
+    pickVC.titleButton = pickButton;
     [pickVC.view addSubview:pickVC.titleButton];
-    
-    pickVC.arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"botton"]];
-    pickVC.arrowImageView.center = CGPointMake(CGRectGetWidth(pickVC.titleButton.frame)-20, CGRectGetHeight(pickVC.titleButton.frame)/2);
-    [pickVC.titleButton addSubview:pickVC.arrowImageView];
+
+    [pickVC.titleButton addTarget:pickVC action:@selector(pickTitleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    // default image
+    pickVC.bottonImage = [UIImage imageNamed:@"botton"];
+    pickVC.topImage = [UIImage imageNamed:@"top"];
     
     pickVC.scorllView = [[UIScrollView alloc] initWithFrame:pickVC.titleButton.frame];
     pickVC.scorllView.backgroundColor = [UIColor colorWithRed:0.99 green:0.50 blue:0.15 alpha:1.00];
     pickVC.scorllView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    [pickVC.scorllView alwaysBounceHorizontal];
     [pickVC.view insertSubview:pickVC.scorllView atIndex:0];
     
     pickVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
@@ -55,65 +62,40 @@
     int i = 0;
     CGFloat width = CGRectGetWidth(pickVC.scorllView.frame);
     CGFloat height = CGRectGetHeight(pickVC.scorllView.frame);
+    CGFloat topHeight = height+space;
+    CGFloat buttonHeight = (height-2*space);
     for (NSString *title in titleList) {
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.tag = i;
-        CGFloat topHeight = height+space;
-        CGFloat buttonHeight = (height-2*space);
-        button.frame = CGRectMake(6, topHeight+(6+buttonHeight)*i, width-12, buttonHeight);
+        button.frame = CGRectMake(6, topHeight+(2*space+buttonHeight)*i, width-12, buttonHeight);
         [button setTitle:title forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitleColor:titleButton.titleLabel.textColor forState:UIControlStateNormal];
         [button addTarget:pickVC action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         button.layer.cornerRadius = floorf(CGRectGetHeight(button.frame)/2);
         button.layer.masksToBounds = YES;
         [pickVC.scorllView addSubview:button];
         
         if ([title isEqualToString:titleButtonText]) {
-            button.backgroundColor = [UIColor colorWithRed:0.99 green:0.66 blue:0.16 alpha:1.00];
+            button.backgroundColor = titleButton.backgroundColor;
         }
         i++;
     }
-    pickVC.scorllView.contentSize = CGSizeMake(1, (i+1)*height);
-    
     // default values
-    if (titleList.count > 3) {
-        [pickVC setBackViewHeight:height*4];
-    } else {
-        [pickVC setBackViewHeight:height*(titleList.count+1)];
-    }
+    [pickVC setBackViewHeight:height*(titleList.count+1)];
     [pickVC setCornerRadius:floorf(height/2)];
     return pickVC;
 }
 
-+ (UIButton *)arrowButtonWithTitle:(NSString *)title frame:(CGRect)frame {
++ (ZQPickButton *)buttonWithFrame:(CGRect)frame {
     
-    UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    titleButton.frame = frame;
+    ZQPickButton *titleButton = [[ZQPickButton alloc] initWithFrame:frame];
     titleButton.backgroundColor = [UIColor colorWithRed:0.99 green:0.66 blue:0.16 alpha:1.00];
-    [titleButton setTitle:title forState:UIControlStateNormal];
-    [titleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    titleButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    titleButton.titleLabel.textColor = [UIColor whiteColor];
     titleButton.layer.cornerRadius = floorf(CGRectGetHeight(frame)/2);
     titleButton.layer.masksToBounds = YES;
-
-    [self addArrowImageView:titleButton];
-
     return titleButton;
-}
-
-+ (void)addArrowImageView:(UIButton *)button {
-    
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor colorWithRed:0.99 green:0.66 blue:0.16 alpha:1.00];
-    button.layer.cornerRadius = floorf(CGRectGetHeight(button.frame)/2);
-    button.layer.masksToBounds = YES;
-
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
-
-    UIImageView *arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"botton"]];
-    arrowImageView.center = CGPointMake(CGRectGetWidth(button.frame)-20, CGRectGetHeight(button.frame)/2);
-    [button addSubview:arrowImageView];
-
 }
 
 - (void)setBackViewHeight:(CGFloat)backViewHeight {
@@ -132,6 +114,22 @@
 - (void)setBackViewColor:(UIColor *)backViewColor {
     
     self.scorllView.backgroundColor = backViewColor;
+}
+
+- (void)setTopImageName:(NSString *)topImageName {
+    
+    UIImage *image = [UIImage imageNamed:topImageName];
+    if (image) {
+        self.topImage = image;
+    }
+}
+
+- (void)setBottonImageName:(NSString *)bottonImageName {
+    
+    UIImage *image = [UIImage imageNamed:bottonImageName];
+    if (image) {
+        self.bottonImage = image;
+    }
 }
 
 - (void)show {
@@ -169,7 +167,7 @@
             completion();
         }
     }];
-    self.arrowImageView.image = [UIImage imageNamed:@"botton"];
+    _titleButton.arrowImageView.image = self.bottonImage;
 }
 
 - (void)showScrollView:(void(^)())completion {
@@ -183,12 +181,12 @@
             completion();
         }
     }];
-    self.arrowImageView.image = [UIImage imageNamed:@"top"];
+    _titleButton.arrowImageView.image = self.topImage;
 }
 
 #pragma mark - UIButton
 
-- (void)pickTitleBtnAction:(UIButton *)sender {
+- (void)pickTitleBtnAction:(ZQPickButton *)sender {
     
     if (sender.selected) {
         [self showScrollView:nil];
@@ -201,7 +199,7 @@
 
 - (void)buttonAction:(UIButton *)sender {
     
-    [self.titleButton setTitle:sender.titleLabel.text forState:UIControlStateNormal];
+    self.titleButton.titleLabel.text = sender.titleLabel.text;
     if (self.selectedCallBack) {
         self.selectedCallBack(self,sender.tag);
     }

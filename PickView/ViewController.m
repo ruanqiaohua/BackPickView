@@ -8,12 +8,11 @@
 
 #import "ViewController.h"
 #import "ZQPickViewController.h"
+#import "UIImage+Add.h"
 
 @interface ViewController ()
 
-@property (nonatomic, strong) UIButton *titleBtn;
-
-@property (nonatomic, weak) IBOutlet UIButton *titleBtn1;
+@property (nonatomic, strong) ZQPickButton *titleBtn;
 
 @end
 
@@ -21,22 +20,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // 代码创建button
-    _titleBtn = [ZQPickViewController arrowButtonWithTitle:@"Test1" frame:CGRectMake(100, 200, 120, 50)];
+
+    _titleBtn = [ZQPickViewController buttonWithFrame:CGRectMake(100, 200, 120, 30)];
+    _titleBtn.titleLabel.text = [NSString stringWithFormat:@"Test1"];
+    _titleBtn.arrowImageView.image = [UIImage imageNamed:@"botton"];
+    _titleBtn.imageView.image = [[UIImage imageNamed:@"cat"] circleImage];
     [self.view addSubview:_titleBtn];
     [_titleBtn addTarget:self action:@selector(showPickView:) forControlEvents:UIControlEventTouchUpInside];
-    // xib创建button
-    [ZQPickViewController addArrowImageView:_titleBtn1];
-    [_titleBtn1 addTarget:self action:@selector(showPickView:) forControlEvents:UIControlEventTouchUpInside];
-
 }
 
-- (void)showPickView:(UIButton *)sender {
+- (void)showPickView:(ZQPickButton *)sender {
     
     NSArray *titleList = @[@"Test1",@"Test2",@"Test3",@"Test4",@"Test5"];
     ZQPickViewController *vc = [ZQPickViewController initWithTitleButton:sender titleList:titleList];
     [vc selectedCallBack:^(ZQPickViewController *pickViewController, NSInteger index) {
-        [sender setTitle:titleList[index] forState:UIControlStateNormal];
+        sender.titleLabel.text = titleList[index];
         [pickViewController hidden];
     }];
     [vc show];
